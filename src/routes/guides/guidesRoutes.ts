@@ -5,6 +5,7 @@ import { getAllGuidesController } from "../../controllers/guides/GetAllGuidesCon
 import { getByIdGuideController } from "../../controllers/guides/GetByIdGuideController.js";
 import { getCategoriesAndContentController } from "../../controllers/guides/GetCategoriesAndContentController.js";
 import { updateGuideController } from "../../controllers/guides/UpdateGuideController.js";
+import { deleteGuideRequestMiddleware } from "../../middlewares/guides/deleteGuideRequestMiddleware.js";
 import { guideRequestMiddleware } from "../../middlewares/guides/guideRequestMiddleware.js";
 import { guideRequestValidator } from "../../middlewares/guides/validators/guideRequestValidator.js";
 
@@ -41,7 +42,7 @@ guidesRouter.put(
 guidesRouter.delete(
   "/:id",
   guideRequestValidator("delete"),
-  guideRequestMiddleware,
+  deleteGuideRequestMiddleware,
   deleteGuideController.handler
 );
 

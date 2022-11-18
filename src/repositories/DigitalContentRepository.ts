@@ -10,6 +10,7 @@ export interface DigitalContentRepository {
   ): Promise<number>;
   findByCategoryId(id: string): Promise<DigitalContentEntity[]>;
   findById(id: string): Promise<DigitalContentEntity | null>;
+  findByGuideId(id: string): Promise<DigitalContentEntity[]>
   findAll(): Promise<DigitalContentEntity[]>;
   delete(id: string): Promise<number>;
 }
