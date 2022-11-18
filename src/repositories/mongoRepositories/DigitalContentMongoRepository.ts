@@ -10,14 +10,19 @@ export class DigitalContentMongoRepository implements DigitalContentRepository {
   async create(guide: DigitalContentEntity): Promise<DigitalContentEntity> {
     return this.database.create(guide);
   }
-
+  
   async update(id: string, guide: DigitalContentEntity): Promise<number> {
     const result = await this.database.updateOne({ _id: id }, guide);
     return result.modifiedCount;
   }
-
+  
+  
   async findById(id: string): Promise<DigitalContentEntity | null> {
     return this.database.findById(id);
+  }
+  
+  async findByGuideId(id: string): Promise<DigitalContentEntity[]> {
+    return this.database.find().where("guide", id);
   }
 
   async findByCategoryId(id: string): Promise<DigitalContentEntity[]> {
