@@ -1,5 +1,6 @@
 import { CategoryEntity } from "../../entities/CategoryEntity.js";
 import { CategoryModel } from "../../models/CategoryModel.js";
+import { GuideModel } from "../../models/GuideModel.js";
 import { CategoryRepository } from "../CategoryRepository.js";
 
 export class CategoryMongoRepository implements CategoryRepository {
@@ -19,7 +20,10 @@ export class CategoryMongoRepository implements CategoryRepository {
   }
 
   async findAll(): Promise<CategoryEntity[]> {
-    return this.database.find();
+    return this.database.find().populate({
+      path: "guide",
+      model: GuideModel
+    });
   }
 
   async delete(id: string): Promise<number> {
@@ -28,6 +32,9 @@ export class CategoryMongoRepository implements CategoryRepository {
   }
 
   async findByGuideId(guideId: string): Promise<CategoryEntity[]> {
-    return this.database.find({ guide: guideId }).populate("guide");
+    return this.database.find({ guide: guideId }).populate({
+      path: "guide",
+      model: GuideModel
+    });
   }
 }

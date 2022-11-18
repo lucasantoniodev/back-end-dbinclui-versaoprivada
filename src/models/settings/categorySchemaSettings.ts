@@ -12,6 +12,6 @@ export const categorySchemaSettings = {
     guide: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'Guide',
+        ref: 'guide',
     },
 };

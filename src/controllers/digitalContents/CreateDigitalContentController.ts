@@ -7,6 +7,7 @@ import {
 } from "../../responses/appResponses.js";
 import { CreateDigitalContentService } from "../../services/digitalContents/CreateDigitalContentService.js";
 
+
 class CreateDigitalContentController {
   async handler(req: Request, res: Response) {
     try {
@@ -18,9 +19,20 @@ class CreateDigitalContentController {
         digitalContentRepository
       );
 
+ 
+      let newList = [];
+      for (let file of files) {
+        const obj = {
+          filePath: file.path,
+          publicId: file.filename,
+        };
+
+        newList.push(obj)
+      }
+
       const result = await digitalContentService.execute({
         ...body,
-        filePaths: files,
+        filePaths: newList,
       });
 
       return sucessfulResponse(res, { data: result });

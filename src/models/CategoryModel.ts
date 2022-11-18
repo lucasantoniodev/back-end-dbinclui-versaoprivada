@@ -9,9 +9,9 @@ const CategorySchema = new Schema<CategoryEntity>(
 );
 
 const CategoryModel = model<CategoryEntity>(
-    'Category',
+    'category',
     CategorySchema,
-    'Categories'
+    'categories'
 );
 
 export { CategoryModel };

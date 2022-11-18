@@ -63,7 +63,18 @@ export class DigitalContentMongoRepository implements DigitalContentRepository {
   }
 
   async findAll(): Promise<DigitalContentEntity[]> {
-    return this.database.find();
+    return this.database.find().populate([
+      {
+        path: "guide",
+        model: GuideModel,
+        strictPopulate: true,
+      },
+      {
+        path: "category",
+        model: CategoryModel,
+        strictPopulate: true,
+      },
+    ]);
   }
 
   async delete(id: string): Promise<number> {

@@ -38,9 +38,9 @@ export class GuideMongoRepository implements GuideRepository {
         },
         {
           $lookup: {
-            from: "Categories",
+            from: "categories",
             let: { guideId: "$_id" },
-            as: "Categories",
+            as: "categories",
             pipeline: [
               {
                 $match: {
@@ -51,7 +51,7 @@ export class GuideMongoRepository implements GuideRepository {
               },
               {
                 $lookup: {
-                  from: "DigitalContents",
+                  from: "digitalContents",
                   let: { categoryId: "$_id" },
                   pipeline: [
                     {
@@ -62,7 +62,7 @@ export class GuideMongoRepository implements GuideRepository {
                       },
                     },
                   ],
-                  as: "DigitalContents",
+                  as: "digitalContents",
                 },
               },
             ],

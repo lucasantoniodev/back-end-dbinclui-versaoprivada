@@ -7,9 +7,9 @@ const DigitalContentSchema = new Schema<DigitalContentEntity>(
 );
 
 const DigitalContentModel = model<DigitalContentEntity>(
-    'DigitalContent',
+    'digitalContent',
     DigitalContentSchema,
-    'DigitalContents'
+    'digitalContents'
 );
 
 export { DigitalContentModel };

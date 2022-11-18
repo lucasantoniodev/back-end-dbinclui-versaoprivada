@@ -12,17 +12,17 @@ export const digitalSchemaSettings ={
     guide: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'Guides',
+        ref: 'guides',
     },
     category: {
         type: Schema.Types.ObjectId,
-        ref: 'Categories',
+        ref: 'categories',
     },
     filePaths: [
         {
             type: {
-                path: String,
-                filename: String,
+                filePath: String,
+                publicId: String,
             },
             required: true,
         },
