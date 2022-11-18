@@ -22,7 +22,17 @@ export const createDigitalContentRequestMiddleware = async (
   res: Response,
   next: NextFunction
 ) => {
-  const files = req.files as FileRequest[];
+  const filesRequest = req.files as FileRequest[];
+
+  let files = [];
+      for (let file of filesRequest) {
+        const obj = {
+          filePath: file.path,
+          publicId: file.filename,
+        };
+
+        files.push(obj)
+      }
 
   const errors = validationResult(req);
 

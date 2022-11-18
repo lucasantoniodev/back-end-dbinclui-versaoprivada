@@ -2,8 +2,8 @@ import { CategoryEntity } from './CategoryEntity.js';
 import { GuideEntity } from './GuideEntity.js';
 
 export interface FileProps {
-    path: string;
-    filename: string;
+    filePath: string;
+    publicId: string;
 }
 
 export interface DigitalContentEntity {

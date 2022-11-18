@@ -4,13 +4,18 @@ import {
 } from "../../entities/DigitalContentEntity.js";
 import { DigitalContentRepository } from "../../repositories/DigitalContentRepository.js";
 
+interface File {
+  filePath: string;
+  publicId: string;
+}
+
 export class UpdateDigitalContentService {
   constructor(private readonly repository: DigitalContentRepository) {}
 
   async execute(
     id: string,
     contentRequest: DigitalContentEntity,
-    files: FileProps[]
+    files: File[]
   ) {
     try {
       const content = await this.repository.findById(id);
@@ -22,7 +27,7 @@ export class UpdateDigitalContentService {
       let oldPublic_ids: string[] = [];
 
       if (files) {
-        content.filePaths.forEach((file) => oldPublic_ids.push(file.filename));
+        content.filePaths.forEach((file) => oldPublic_ids.push(file.publicId));
       }
 
       content.title = contentRequest?.title ?? content.title;

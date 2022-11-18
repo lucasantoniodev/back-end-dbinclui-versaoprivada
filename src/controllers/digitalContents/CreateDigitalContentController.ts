@@ -6,13 +6,16 @@ import {
   sucessfulResponse,
 } from "../../responses/appResponses.js";
 import { CreateDigitalContentService } from "../../services/digitalContents/CreateDigitalContentService.js";
+import { RequestFileProps } from "./interfaces/RequestProps.js";
+
+
 
 
 class CreateDigitalContentController {
   async handler(req: Request, res: Response) {
     try {
       const body = req.body;
-      const files: FileProps[] = req.files as FileProps[];
+      const files: RequestFileProps[] = req.files as RequestFileProps[];
 
       const digitalContentRepository = new DigitalContentMongoRepository();
       const digitalContentService = new CreateDigitalContentService(
