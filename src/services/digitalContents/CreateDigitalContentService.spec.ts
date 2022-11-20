@@ -28,8 +28,8 @@ describe("CreateDigitalContentService", () => {
       },
       filePaths: [
         {
-          filename: `arquivo${repository.database.length}`,
-          path: `link.com/arquivo${repository.database.length}`,
+          publicId: `arquivo${repository.database.length}`,
+          filePath: `link.com/arquivo${repository.database.length}`,
         },
       ],
     };
@@ -38,6 +38,6 @@ describe("CreateDigitalContentService", () => {
 
     expect(result).not.toBeNull();
     expect(result._id).toBe("0");
-    expect(result.title).toBe("Título do conteúdo digital 0")
+    expect(result.title).toBe("Título do conteúdo digital 0");
   });
 });

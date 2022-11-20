@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { CategoryMongoRepository } from "../../repositories/mongoRepositories/CategoryMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
 import { GetAllCategoriesService } from "../../services/categories/GetAllCategoriesService.js";
 
 class GetAllCategoriesController {

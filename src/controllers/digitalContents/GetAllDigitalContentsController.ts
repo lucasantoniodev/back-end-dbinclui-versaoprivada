@@ -1,18 +1,13 @@
 import { Request, Response } from "express";
 import { DigitalContentMongoRepository } from "../../repositories/mongoRepositories/DigitalContentMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
 import { GetAllDigitalContentsService } from "../../services/digitalContents/GetAllDigitalContentsService.js";
 
 class GetAllDigitalContentsController {
   async handler(_: Request, res: Response) {
     try {
       const contentRepository = new DigitalContentMongoRepository();
-      const contentService = new GetAllDigitalContentsService(
-        contentRepository
-      );
+      const contentService = new GetAllDigitalContentsService(contentRepository);
 
       const result = await contentService.execute();
 
@@ -23,5 +18,4 @@ class GetAllDigitalContentsController {
   }
 }
 
-export const getAllDigitalContentsController =
-  new GetAllDigitalContentsController();
+export const getAllDigitalContentsController = new GetAllDigitalContentsController();

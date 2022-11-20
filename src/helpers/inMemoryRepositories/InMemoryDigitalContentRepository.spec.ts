@@ -12,38 +12,40 @@ describe("description", () => {
     await repository.loadData(3);
   });
 
-  it("Should create and return a DigitalContent", async () => {
-    const contentExample = {
-      title: `Título do conteúdo digital ${repository.database.length}`,
-      shortDescription: `Descrição do conteúdo digital`,
-      guide: {
-        _id: String(repository.database.length),
-        title: `Título do guia ${repository.database.length}`,
-        content: `Conteúdo do guia ${repository.database.length}`,
-      },
-      category: {
-        _id: String(repository.database.length),
-        title: `Título da categoria ${repository.database.length}`,
-        shortDescription: `Descrição da categoria ${repository.database.length}`,
+  describe("Create", () => {
+    it("Should create and return a DigitalContent", async () => {
+      const contentExample = {
+        title: `Título do conteúdo digital ${repository.database.length}`,
+        shortDescription: `Descrição do conteúdo digital`,
         guide: {
           _id: String(repository.database.length),
           title: `Título do guia ${repository.database.length}`,
           content: `Conteúdo do guia ${repository.database.length}`,
         },
-      },
-      filePaths: [
-        {
-          filename: `arquivo${repository.database.length}`,
-          path: `link.com/arquivo${repository.database.length}`,
+        category: {
+          _id: String(repository.database.length),
+          title: `Título da categoria ${repository.database.length}`,
+          shortDescription: `Descrição da categoria ${repository.database.length}`,
+          guide: {
+            _id: String(repository.database.length),
+            title: `Título do guia ${repository.database.length}`,
+            content: `Conteúdo do guia ${repository.database.length}`,
+          },
         },
-      ],
-    };
+        filePaths: [
+          {
+            publicId: `arquivo${repository.database.length}`,
+            filePath: `link.com/arquivo${repository.database.length}`,
+          },
+        ],
+      };
 
-    const result = await repository.create(contentExample);
+      const result = await repository.create(contentExample);
 
-    expect(result).not.toBeNull();
-    expect(result._id).toBe("3");
-    expect(result.title).toBe(`Título do conteúdo digital ${3}`);
+      expect(result).not.toBeNull();
+      expect(result._id).toBe("3");
+      expect(result.title).toBe(`Título do conteúdo digital ${3}`);
+    });
   });
 
   describe("update", () => {
@@ -69,13 +71,13 @@ describe("description", () => {
         },
         filePaths: [
           {
-            filename: `arquivo${repository.database.length}`,
-            path: `link.com/arquivo${repository.database.length}`,
+            publicId: `arquivo${repository.database.length}`,
+            filePath: `link.com/arquivo${repository.database.length}`,
           },
         ],
       };
 
-      const result = await repository.update(contentExample);
+      const result = await repository.update("1290-1", contentExample);
 
       expect(result).toEqual(0);
     });
@@ -102,69 +104,15 @@ describe("description", () => {
         },
         filePaths: [
           {
-            filename: `arquivo${repository.database.length}`,
-            path: `link.com/arquivo${repository.database.length}`,
+            publicId: `arquivo${repository.database.length}`,
+            filePath: `link.com/arquivo${repository.database.length}`,
           },
         ],
       };
 
-      const result = await repository.update(contentExample);
+      const result = await repository.update("0", contentExample);
 
       expect(result).toEqual(1);
-    });
-  });
-
-  describe("Update Media by public_id", () => {
-    it("Should return 0 if DigitalContent public_id not found", async () => {
-      const result = await repository.updateMediaByPublicId(
-        "indaskdjal",
-        "Novo Path",
-        "Novo Filename"
-      );
-
-      expect(result).toEqual(0);
-    });
-
-    it("Should update and return 1 like an updateCount", async () => {
-      const result = await repository.updateMediaByPublicId(
-        "arquivo0",
-        "Novo path",
-        "Novo FileName"
-      );
-
-      expect(result).toEqual(1);
-      expect(repository.database[0].filePaths[0].filename).toBe(
-        "Novo FileName"
-      );
-    });
-  });
-
-  describe("findMediaByPublicId", () => {
-    it("Should return null if public_id not found", async () => {
-      const result = await repository.findMediaByPublicId("sadasd");
-
-      expect(result).toBeNull();
-    });
-
-    it("Should return a digital content by public_id", async () => {
-      const result = await repository.findMediaByPublicId("arquivo1");
-
-      expect(result).not.toBeNull();
-      expect(result?._id).toBe("1")
-    });
-  });
-  describe("findById", () => {
-    it("Should be null if ID not found", async () => {
-      const result = await repository.findById("123");
-
-      expect(result).toBeNull();
-    });
-
-    it("Should return a DigitalContent by ID", async () => {
-      const result = await repository.findById("0");
-      expect(result).not.toBeNull();
-      expect(result?._id).toBe("0");
-      expect(result?.title).toBe("Título do conteúdo digital 0");
     });
   });
 
@@ -180,6 +128,30 @@ describe("description", () => {
 
       expect(result.length).not.toBeNull();
       expect(result.length).toEqual(3);
+    });
+  });
+
+  describe("findById", () => {
+    it("Should be null if ID not found", async () => {
+      const result = await repository.findById("123");
+
+      expect(result).toBeNull();
+    });
+
+    it("Should return a DigitalContent by ID", async () => {
+      const result = await repository.findById("0");
+      expect(result).not.toBeNull();
+      expect(result?._id).toBe("0");
+      expect(result?.title).toBe("Título do conteúdo digital 0");
+    });
+  });
+
+  describe("findByGuideId", () => {
+    it("Should return an array with 1 digital content", async () => {
+      const result = await repository.findByGuideId("0");
+
+      expect(result.length).toEqual(1);
+      expect(result[0]._id).toBe("0");
     });
   });
 

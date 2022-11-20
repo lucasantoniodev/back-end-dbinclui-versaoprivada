@@ -1,7 +1,6 @@
 import { v2 as cloudinary } from "cloudinary";
 import { CloudinaryStorage } from "multer-storage-cloudinary";
 
-
 interface CloudParams {
   folder: string;
   resource_type: string;

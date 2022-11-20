@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { DigitalContentMongoRepository } from "../../repositories/mongoRepositories/DigitalContentMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
 import { GetByCategoryIdDigitalContentService } from "../../services/digitalContents/GetByCategoryIdDigitalContentService.js";
 
 class GetByCategoryIdDigitalContentController {
@@ -12,9 +9,7 @@ class GetByCategoryIdDigitalContentController {
       const id = req.params["id"];
 
       const contentRepository = new DigitalContentMongoRepository();
-      const contentService = new GetByCategoryIdDigitalContentService(
-        contentRepository
-      );
+      const contentService = new GetByCategoryIdDigitalContentService(contentRepository);
 
       const result = await contentService.execute(id);
 

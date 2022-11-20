@@ -1,4 +1,4 @@
-import { Request, Response, Router } from "express";
+import { Router } from "express";
 import { createCategoryController } from "../../controllers/categories/CreateCategoryController.js";
 import { deleteCategoryController } from "../../controllers/categories/DeleteCategoryController.js";
 import { getAllCategoriesController } from "../../controllers/categories/GetAllCategoriesController.js";
@@ -14,14 +14,14 @@ categoriesRouter.post(
   "/",
   categoryRequestValidator("post"),
   categoryRequestMiddleware,
-  createCategoryController.handler
+  createCategoryController.handler,
 );
 
 categoriesRouter.put(
   "/:id",
   categoryRequestValidator("put"),
   categoryRequestMiddleware,
-  updateCategoryController.handler
+  updateCategoryController.handler,
 );
 
 categoriesRouter.get("/", getAllCategoriesController.handler);
@@ -30,21 +30,21 @@ categoriesRouter.get(
   "/:id",
   categoryRequestValidator("get"),
   categoryRequestMiddleware,
-  getByIdCategoryController.handler
+  getByIdCategoryController.handler,
 );
 
 categoriesRouter.get(
   "/guide/:id",
   categoryRequestValidator("get"),
   categoryRequestMiddleware,
-  getByGuideIdCategoryController.handler
+  getByGuideIdCategoryController.handler,
 );
 
 categoriesRouter.delete(
   "/:id",
   categoryRequestValidator("delete"),
   categoryRequestMiddleware,
-  deleteCategoryController.handler
+  deleteCategoryController.handler,
 );
 
 export { categoriesRouter };

@@ -1,10 +1,7 @@
 import { Request, Response } from "express";
 import { GuideMongoRepository } from "../../repositories/mongoRepositories/GuideMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
-import { GetCategoriesAndContentGuideService } from "../../services/guides/GetCategoriesAndContentGuideService.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
+import { GetCategoriesAndContentGuideService } from "../../services/guides/GetCategoriesAndContentsGuideService.js";
 
 class GetCategoriesAndContentController {
   async handler(req: Request, res: Response) {
@@ -12,9 +9,7 @@ class GetCategoriesAndContentController {
       const id = req.params["id"];
 
       const guideRepository = new GuideMongoRepository();
-      const guideService = new GetCategoriesAndContentGuideService(
-        guideRepository
-      );
+      const guideService = new GetCategoriesAndContentGuideService(guideRepository);
 
       const result = await guideService.execute(id);
 
@@ -25,5 +20,4 @@ class GetCategoriesAndContentController {
   }
 }
 
-export const getCategoriesAndContentController =
-  new GetCategoriesAndContentController();
+export const getCategoriesAndContentController = new GetCategoriesAndContentController();

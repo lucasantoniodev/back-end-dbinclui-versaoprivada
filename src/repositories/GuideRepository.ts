@@ -1,10 +1,11 @@
-import { GuideEntity } from '../entities/GuideEntity.js';
+import { GuideEntity } from "../entities/GuideEntity.js";
+import { GuideCategoriesAndContentsInterface } from "../interfaces/GuideCategoriesAndContentsInterface.js";
 
 export interface GuideRepository {
-    create(guide: GuideEntity): Promise<GuideEntity>;
-    update(guide: GuideEntity): Promise<number>;
-    findById(id: string): Promise<GuideEntity | null>;
-    findByCategoryAndContent(id: string): Promise<any>;
-    findAll(): Promise<GuideEntity[]>;
-    delete(id: string): Promise<number>;
+  create(guide: GuideEntity): Promise<GuideEntity>;
+  update(guide: GuideEntity): Promise<number>;
+  findAll(): Promise<GuideEntity[]>;
+  findById(id: string): Promise<GuideEntity | null>;
+  findCategoriesAndContentsByGuideId(id: string): Promise<GuideCategoriesAndContentsInterface>;
+  delete(id: string): Promise<number>;
 }

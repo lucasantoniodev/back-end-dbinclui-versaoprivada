@@ -20,19 +20,19 @@ export interface FileRequest {
 export const createDigitalContentRequestMiddleware = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const filesRequest = req.files as FileRequest[];
 
   let files = [];
-      for (let file of filesRequest) {
-        const obj = {
-          filePath: file.path,
-          publicId: file.filename,
-        };
+  for (let file of filesRequest) {
+    const obj = {
+      filePath: file.path,
+      publicId: file.filename,
+    };
 
-        files.push(obj)
-      }
+    files.push(obj);
+  }
 
   const errors = validationResult(req);
 

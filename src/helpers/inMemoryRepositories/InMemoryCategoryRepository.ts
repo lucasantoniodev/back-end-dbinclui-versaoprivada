@@ -25,9 +25,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
   }
 
   async findById(id: string): Promise<CategoryEntity | null> {
-    const result = this.database.find(
-      (category) => (category._id as unknown as string) === id
-    );
+    const result = this.database.find((category) => (category._id as unknown as string) === id);
     return result ?? null;
   }
 
@@ -50,9 +48,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
   }
 
   async findByGuideId(guideId: string): Promise<CategoryEntity[]> {
-    const result = this.database.filter(
-      (category) => category.guide._id === guideId
-    );
+    const result = this.database.filter((category) => category.guide._id === guideId);
 
     return result;
   }
@@ -61,9 +57,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
     const categoryExample: CategoryEntity = {
       _id: String(this.database.length),
       title: `Título da categoria ${String(this.database.length)}`,
-      shortDescription: `Descrição da categoria ${String(
-        this.database.length
-      )}`,
+      shortDescription: `Descrição da categoria ${String(this.database.length)}`,
       guide: {
         _id: "0",
         title: `Título do guia 0`,
@@ -79,9 +73,7 @@ export class InMemoryCategoryRepository implements CategoryRepository {
       const categoryExample: CategoryEntity = {
         _id: String(this.database.length),
         title: `Título da categoria ${String(this.database.length)}`,
-        shortDescription: `Descrição da categoria ${String(
-          this.database.length
-        )}`,
+        shortDescription: `Descrição da categoria ${String(this.database.length)}`,
         guide: {
           _id: `${i}`,
           title: `Título do guia ${i}`,

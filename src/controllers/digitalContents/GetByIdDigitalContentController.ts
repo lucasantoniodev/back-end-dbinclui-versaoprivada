@@ -13,9 +13,7 @@ class GetByIdDigitalContentController {
       const id = req.params["id"];
 
       const contentRepository = new DigitalContentMongoRepository();
-      const contentService = new GetByIdDigitalContentService(
-        contentRepository
-      );
+      const contentService = new GetByIdDigitalContentService(contentRepository);
 
       const result = await contentService.execute(id);
       if (result instanceof Error) {
@@ -29,5 +27,4 @@ class GetByIdDigitalContentController {
   }
 }
 
-export const getByIdDigitalContentController =
-  new GetByIdDigitalContentController();
+export const getByIdDigitalContentController = new GetByIdDigitalContentController();

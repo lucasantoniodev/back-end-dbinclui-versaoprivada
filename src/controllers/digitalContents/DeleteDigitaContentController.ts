@@ -32,5 +32,4 @@ class DeleteDigitalContentController {
   }
 }
 
-export const deleteDigitalContentController =
-  new DeleteDigitalContentController();
+export const deleteDigitalContentController = new DeleteDigitalContentController();

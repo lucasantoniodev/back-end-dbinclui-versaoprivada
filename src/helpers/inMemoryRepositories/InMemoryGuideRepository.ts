@@ -1,4 +1,5 @@
 import { GuideEntity } from "../../entities/GuideEntity.js";
+import { GuideCategoriesAndContentsInterface } from "../../interfaces/GuideCategoriesAndContentsInterface.js";
 import { GuideRepository } from "../../repositories/GuideRepository.js";
 
 export class InMemoryGuideRepository implements GuideRepository {
@@ -24,15 +25,19 @@ export class InMemoryGuideRepository implements GuideRepository {
     return 1;
   }
 
+  async findAll(): Promise<GuideEntity[]> {
+    return this.database;
+  }
+
   async findById(id: string): Promise<GuideEntity | null> {
-    const result = this.database.find(
-      (guide) => (guide._id as unknown as string) === id
-    );
+    const result = this.database.find((guide) => (guide._id as unknown as string) === id);
     return result ?? null;
   }
 
-  async findAll(): Promise<GuideEntity[]> {
-    return this.database;
+  async findCategoriesAndContentsByGuideId(id: string): Promise<any> {
+    const result = this.database.filter((guide) => guide._id === id);
+
+    return result;
   }
 
   async delete(id: string): Promise<number> {

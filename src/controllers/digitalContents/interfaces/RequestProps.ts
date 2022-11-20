@@ -1,4 +1,4 @@
 export interface RequestFileProps {
-    path: string;
-    filename: string;
-  } 
+  path: string;
+  filename: string;
+}

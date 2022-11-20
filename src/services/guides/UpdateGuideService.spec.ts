@@ -18,10 +18,7 @@ describe("UpdateGuideService", () => {
       content: "Conteúdo inexistente",
     };
 
-    const result = await guideService.execute(
-      guideExample._id as string,
-      guideExample
-    );
+    const result = await guideService.execute(guideExample._id as string, guideExample);
     expect(result).toBeInstanceOf(Error);
   });
 
@@ -32,10 +29,7 @@ describe("UpdateGuideService", () => {
       content: "Conteúdo atualizado",
     };
 
-    const result = await guideService.execute(
-      guideExample._id as string,
-      guideExample
-    );
+    const result = await guideService.execute(guideExample._id as string, guideExample);
     expect(result).toEqual(1);
   });
 });

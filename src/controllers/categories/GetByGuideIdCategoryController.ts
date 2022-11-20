@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { CategoryMongoRepository } from "../../repositories/mongoRepositories/CategoryMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
 import { GetByGuideIdCategoryService } from "../../services/categories/GetByGuideIdCategoryService.js";
 
 class GetByGuideIdCategoryController {
@@ -12,9 +9,7 @@ class GetByGuideIdCategoryController {
       const id = req.params["id"];
 
       const categoryRepository = new CategoryMongoRepository();
-      const categoryService = new GetByGuideIdCategoryService(
-        categoryRepository
-      );
+      const categoryService = new GetByGuideIdCategoryService(categoryRepository);
 
       const result = await categoryService.execute(id);
 

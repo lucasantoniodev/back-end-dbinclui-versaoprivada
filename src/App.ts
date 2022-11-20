@@ -2,7 +2,7 @@ import { router } from "./routes/router.js";
 import cors from "cors";
 import express from "express";
 import morgan from "morgan";
-import formData from "express-form-data";
+
 export class App {
   private express: express.Express;
   private port?: string;
@@ -36,9 +36,7 @@ export class App {
   start() {
     try {
       this.express.listen(this.port, () => {
-        console.log(
-          `Servidor conectado com sucesso na porta: ${this.express.get("port")}`
-        );
+        console.log(`Servidor conectado com sucesso na porta: ${this.express.get("port")}`);
       });
     } catch (error) {
       console.log("Ocorreu um problema ao iniciar o servidor");

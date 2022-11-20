@@ -24,10 +24,7 @@ describe("UpdateCategoryService", () => {
       },
     };
 
-    const result = await categoryService.execute(
-      categoryExample._id as string,
-      categoryExample
-    );
+    const result = await categoryService.execute(categoryExample._id as string, categoryExample);
     expect(result).toBeInstanceOf(Error);
   });
 
@@ -43,10 +40,7 @@ describe("UpdateCategoryService", () => {
       },
     };
 
-    const result = await categoryService.execute(
-      categoryExample._id as string,
-      categoryExample
-    );
+    const result = await categoryService.execute(categoryExample._id as string, categoryExample);
     expect(result).toEqual(1);
   });
 });

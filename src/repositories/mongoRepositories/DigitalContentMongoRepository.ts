@@ -10,17 +10,16 @@ export class DigitalContentMongoRepository implements DigitalContentRepository {
   async create(guide: DigitalContentEntity): Promise<DigitalContentEntity> {
     return this.database.create(guide);
   }
-  
+
   async update(id: string, guide: DigitalContentEntity): Promise<number> {
     const result = await this.database.updateOne({ _id: id }, guide);
     return result.modifiedCount;
   }
-  
-  
+
   async findById(id: string): Promise<DigitalContentEntity | null> {
     return this.database.findById(id);
   }
-  
+
   async findByGuideId(id: string): Promise<DigitalContentEntity[]> {
     return this.database.find().where("guide", id);
   }
@@ -47,11 +46,7 @@ export class DigitalContentMongoRepository implements DigitalContentRepository {
     return this.database.findOne({ "filePaths.filename": id });
   }
 
-  async updateMediaByPublicId(
-    public_id: string,
-    newPath: string,
-    newFilename: string
-  ) {
+  async updateMediaByPublicId(public_id: string, newPath: string, newFilename: string) {
     const result = await this.database.updateOne(
       { "filePaths.filename": public_id },
       {
@@ -62,7 +57,7 @@ export class DigitalContentMongoRepository implements DigitalContentRepository {
             filename: newFilename,
           },
         },
-      }
+      },
     );
     return result.modifiedCount;
   }

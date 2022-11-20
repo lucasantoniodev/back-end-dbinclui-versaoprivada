@@ -13,8 +13,7 @@ export class UpdateCategoryService {
       }
 
       category.title = categoryRequest.title ?? category.title;
-      category.shortDescription =
-        categoryRequest.shortDescription ?? category.shortDescription;
+      category.shortDescription = categoryRequest.shortDescription ?? category.shortDescription;
       category.guide = categoryRequest.guide ?? category.guide;
 
       const result = await this.repository.update(category);

@@ -22,7 +22,7 @@ export class CategoryMongoRepository implements CategoryRepository {
   async findAll(): Promise<CategoryEntity[]> {
     return this.database.find().populate({
       path: "guide",
-      model: GuideModel
+      model: GuideModel,
     });
   }
 
@@ -34,7 +34,7 @@ export class CategoryMongoRepository implements CategoryRepository {
   async findByGuideId(guideId: string): Promise<CategoryEntity[]> {
     return this.database.find({ guide: guideId }).populate({
       path: "guide",
-      model: GuideModel
+      model: GuideModel,
     });
   }
 }

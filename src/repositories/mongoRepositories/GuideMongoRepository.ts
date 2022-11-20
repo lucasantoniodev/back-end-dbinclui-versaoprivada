@@ -1,5 +1,6 @@
 import { Types } from "mongoose";
 import { GuideEntity } from "../../entities/GuideEntity.js";
+import { GuideCategoriesAndContentsInterface } from "../../interfaces/GuideCategoriesAndContentsInterface.js";
 import { GuideModel } from "../../models/GuideModel.js";
 import { GuideRepository } from "../GuideRepository.js";
 
@@ -28,68 +29,47 @@ export class GuideMongoRepository implements GuideRepository {
     return result.deletedCount;
   }
 
-  async findByCategoryAndContent(id: string): Promise<any> {
-    // aggregate() returns an array, but since here we are searching by id we
-    // get the first element of this array
-    const [guide] = await this.database
-      .aggregate([
-        {
-          $match: { _id: new Types.ObjectId(id) },
-        },
-        {
-          $lookup: {
-            from: "categories",
-            let: { guideId: "$_id" },
-            as: "categories",
-            pipeline: [
-              {
-                $match: {
-                  $expr: {
-                    $eq: ["$$guideId", "$guide"],
-                  },
+  async findCategoriesAndContentsByGuideId(
+    id: string,
+  ): Promise<GuideCategoriesAndContentsInterface> {
+    const [guide] = await this.database.aggregate([
+      {
+        $match: { _id: new Types.ObjectId(id) },
+      },
+      {
+        $lookup: {
+          from: "categories",
+          let: { guideId: "$_id" },
+          as: "categories",
+          pipeline: [
+            {
+              $match: {
+                $expr: {
+                  $eq: ["$$guideId", "$guide"],
                 },
               },
-              {
-                $lookup: {
-                  from: "digitalContents",
-                  let: { categoryId: "$_id" },
-                  pipeline: [
-                    {
-                      $match: {
-                        $expr: {
-                          $eq: ["$$categoryId", "$category"],
-                        },
+            },
+            {
+              $lookup: {
+                from: "digitalContents",
+                let: { categoryId: "$_id" },
+                pipeline: [
+                  {
+                    $match: {
+                      $expr: {
+                        $eq: ["$$categoryId", "$category"],
                       },
                     },
-                  ],
-                  as: "digitalContents",
-                },
+                  },
+                ],
+                as: "digitalContents",
               },
-            ],
-          },
+            },
+          ],
         },
-        // {
-        //   $lookup: {
-        //     from: "DigitalContents",
-        //     let: { guideId: "$_id" },
-        //     as: "DigitalContents",
-        //     pipeline: [
-        //       {
-        //         $match: {
-        //           $expr: {
-        //             $eq: ["$$guideId", "$guide"],
-        //           },
-        //         },
-        //       },
-        //       {
-        //         $match: { category: undefined },
-        //       },
-        //     ],
-        //   },
-        // },
-      ])
-      .exec();
+      },
+    ]);
 
-    return guide;
+    return guide as GuideCategoriesAndContentsInterface;
   }
 }

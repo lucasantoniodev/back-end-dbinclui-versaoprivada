@@ -11,39 +11,36 @@ import { guideRequestValidator } from "../../middlewares/guides/validators/guide
 
 const guidesRouter = Router();
 
-guidesRouter.get("/", getAllGuidesController.handler);
-
 guidesRouter.post(
   "/",
   guideRequestValidator("post"),
   guideRequestMiddleware,
-  createGuideController.handler
+  createGuideController.handler,
 );
+
+guidesRouter.get("/", getAllGuidesController.handler);
 
 guidesRouter.get(
   "/:id",
   guideRequestValidator("get"),
   guideRequestMiddleware,
-  getByIdGuideController.handler
+  getByIdGuideController.handler,
 );
 
-guidesRouter.get(
-  "/categoriesAndContent/:id",
-  getCategoriesAndContentController.handler
-);
+guidesRouter.get("/categoriesAndContent/:id", getCategoriesAndContentController.handler);
 
 guidesRouter.put(
   "/:id",
   guideRequestValidator("put"),
   guideRequestMiddleware,
-  updateGuideController.handler
+  updateGuideController.handler,
 );
 
 guidesRouter.delete(
   "/:id",
   guideRequestValidator("delete"),
   deleteGuideRequestMiddleware,
-  deleteGuideController.handler
+  deleteGuideController.handler,
 );
 
 export { guidesRouter };

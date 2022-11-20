@@ -1,8 +1,6 @@
 import { body, param } from "express-validator";
 
-export const digitalContentRequestValidator = (
-  method: "post" | "put" | "get" | "delete"
-) => {
+export const digitalContentRequestValidator = (method: "post" | "put" | "get" | "delete") => {
   if (method === "post") {
     return [
       body("title")
@@ -35,14 +33,8 @@ export const digitalContentRequestValidator = (
 
   if (method === "put" || method === "get" || method === "delete") {
     return [
-      body("guide")
-        .optional()
-        .isMongoId()
-        .withMessage("Formato do ID do guia inválido"),
-      body("category")
-        .optional()
-        .isMongoId()
-        .withMessage("Formato do ID da categoria inválido"),
+      body("guide").optional().isMongoId().withMessage("Formato do ID do guia inválido"),
+      body("category").optional().isMongoId().withMessage("Formato do ID da categoria inválido"),
       param("id")
         .notEmpty()
         .withMessage("ID do conteúdo digital é necessário para esse método")

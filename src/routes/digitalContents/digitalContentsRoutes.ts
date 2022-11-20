@@ -1,7 +1,6 @@
 import { Router } from "express";
 import { uploadCloudinary } from "../../configs/multer/multerCloudinaryStorageConfig.js";
 import { createDigitalContentController } from "../../controllers/digitalContents/CreateDigitalContentController.js";
-import { bodyRequestMiddleware } from "../../middlewares/digitalContents/bodyRequestMiddleware.js";
 import { createDigitalContentRequestMiddleware } from "../../middlewares/digitalContents/createDigitalContentRequestMiddleware.js";
 import { digitalContentRequestValidator } from "../../middlewares/digitalContents/validators/digitalContentRequestValidator.js";
 import { deleteContentRequestMiddleware } from "../../middlewares/digitalContents/deleteDigitalContentRequestMiddleware.js";
@@ -18,7 +17,7 @@ digitalContentsRouter.get(
   "/:id",
   digitalContentRequestValidator("get"),
   deleteContentRequestMiddleware,
-  getByIdDigitalContentController.handler
+  getByIdDigitalContentController.handler,
 );
 
 digitalContentsRouter.get("/", getAllDigitalContentsController.handler);
@@ -26,10 +25,10 @@ digitalContentsRouter.get("/", getAllDigitalContentsController.handler);
 digitalContentsRouter.post(
   "/",
   uploadCloudinary.array("files"),
-  bodyRequestMiddleware,
+  // bodyRequestMiddleware, // <- Este middleware serve para capturar o conteúdo da variável "data" enviado do formdata e inserir no no body da requisição. 
   digitalContentRequestValidator("post"),
   createDigitalContentRequestMiddleware,
-  createDigitalContentController.handler
+  createDigitalContentController.handler,
 );
 
 digitalContentsRouter.put(
@@ -37,21 +36,19 @@ digitalContentsRouter.put(
   uploadCloudinary.array("files"),
   digitalContentRequestValidator("put"),
   updateDigitalContentMiddleware,
-  updateDigitalContentController.handler
+  updateDigitalContentController.handler,
 );
 
 digitalContentsRouter.get(
   "/categoriesAndContent/:id",
-  getByCategoryIdDigitalContentController.handler
+  getByCategoryIdDigitalContentController.handler,
 );
-
-
 
 digitalContentsRouter.delete(
   "/:id",
   digitalContentRequestValidator("delete"),
   deleteContentRequestMiddleware,
-  deleteDigitalContentController.handler
+  deleteDigitalContentController.handler,
 );
 
 export { digitalContentsRouter };

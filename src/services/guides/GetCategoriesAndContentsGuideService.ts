@@ -4,7 +4,7 @@ export class GetCategoriesAndContentGuideService {
   constructor(private readonly repository: GuideRepository) {}
   async execute(id: string) {
     try {
-      const result = await this.repository.findByCategoryAndContent(id);
+      const result = await this.repository.findCategoriesAndContentsByGuideId(id);
 
       return result;
     } catch (error) {

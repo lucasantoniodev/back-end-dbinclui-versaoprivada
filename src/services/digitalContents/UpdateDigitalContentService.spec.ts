@@ -31,13 +31,13 @@ describe("UpdateDigitalContentService", () => {
       },
       filePaths: [
         {
-          filename: `arquivo${repository.database.length}`,
-          path: `link.com/arquivo${repository.database.length}`,
+          publicId: `arquivo${repository.database.length}`,
+          filePath: `link.com/arquivo${repository.database.length}`,
         },
       ],
     };
 
-    const result = await contentService.execute("123", contentExample);
+    const result = await contentService.execute("123", contentExample, []);
     expect(result).toBeInstanceOf(Error);
   });
 
@@ -62,16 +62,18 @@ describe("UpdateDigitalContentService", () => {
       },
       filePaths: [
         {
-          filename: `arquivo${repository.database.length}`,
-          path: `link.com/arquivo${repository.database.length}`,
+          publicId: `arquivo${repository.database.length}`,
+          filePath: `link.com/arquivo${repository.database.length}`,
         },
       ],
     };
 
-    const result = await contentService.execute("0", contentExample);
+    const { result } = (await contentService.execute("0", contentExample)) as {
+      result: number;
+      oldPublic_ids: string[];
+    };
+
     expect(result).toEqual(1);
-    expect(repository.database[0].title).toBe(
-      "Título do conteúdo digital 0 atualizado"
-    );
+    expect(repository.database[0].title).toBe("Título do conteúdo digital 0 atualizado");
   });
 });

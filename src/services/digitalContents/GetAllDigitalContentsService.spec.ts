@@ -20,6 +20,6 @@ describe("GetAllDigitalContents", () => {
 
     const result = await contentService.execute();
     expect(result.length).toEqual(2);
-    expect(result[0]._id).toBe("0")
+    expect(result[0]._id).toBe("0");
   });
 });

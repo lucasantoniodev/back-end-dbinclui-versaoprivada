@@ -29,6 +29,6 @@ describe("GetByIdDigitalContentService", () => {
     expect(result).not.toBeInstanceOf(Error);
     expect(result).not.toBeInstanceOf(Error);
     expect(content._id).toBe("0");
-    expect(content.title).toBe("Título do conteúdo digital 0")
+    expect(content.title).toBe("Título do conteúdo digital 0");
   });
 });

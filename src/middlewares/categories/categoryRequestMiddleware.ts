@@ -7,7 +7,7 @@ import { GetByIdGuideService } from "../../services/guides/GetByIdGuideService.j
 export const categoryRequestMiddleware = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -16,7 +16,7 @@ export const categoryRequestMiddleware = async (
   }
 
   const { guide } = req.body;
-  
+
   if (req.method === "POST" || (req.method === "PUT" && guide)) {
     const guideRepository = new GuideMongoRepository();
     const guideService = new GetByIdGuideService(guideRepository);

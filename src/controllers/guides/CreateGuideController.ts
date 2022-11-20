@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { GuideMongoRepository } from "../../repositories/mongoRepositories/GuideMongoRepository.js";
-import {
-  serverErrorResponse,
-  sucessfulResponse,
-} from "../../responses/appResponses.js";
+import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
 import { CreateGuideService } from "../../services/guides/CreateGuideService.js";
 
 class CreateGuideController {

@@ -7,6 +7,7 @@ export class CreateGuideService {
   async execute(guide: GuideEntity) {
     try {
       const result = this.guidesRepository.create(guide);
+      
       return result;
     } catch (error) {
       throw new Error(error as string);

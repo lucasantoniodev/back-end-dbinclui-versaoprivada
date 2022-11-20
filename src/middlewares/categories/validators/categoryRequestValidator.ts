@@ -1,8 +1,6 @@
 import { body, param } from "express-validator";
 
-export const categoryRequestValidator = (
-  method: "post" | "put" | "get" | "delete"
-) => {
+export const categoryRequestValidator = (method: "post" | "put" | "get" | "delete") => {
   if (method === "post") {
     return [
       body("title")
@@ -29,10 +27,7 @@ export const categoryRequestValidator = (
 
   if (method === "put" || method === "get" || method === "delete") {
     return [
-      body("guide")
-        .optional()
-        .isMongoId()
-        .withMessage("Formato de ID inválido"),
+      body("guide").optional().isMongoId().withMessage("Formato de ID inválido"),
       param("id")
         .notEmpty()
         .withMessage("Um ID da categoria é necessário para esse método")

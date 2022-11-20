@@ -9,7 +9,7 @@ import { GetByIdGuideService } from "../../services/guides/GetByIdGuideService.j
 export const updateDigitalContentMiddleware = async (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   const errors = validationResult(req);
 
