@@ -22,6 +22,13 @@ export const createDigitalContentRequestMiddleware = async (
   res: Response,
   next: NextFunction,
 ) => {
+  if (req.files?.length === 0) {
+    return clientErrorResponse(
+      res,
+      new Error("Você precisa enviar alguma mídia (imagem ou vídeo)"),
+    );
+  }
+
   const filesRequest = req.files as FileRequest[];
 
   let files = [];

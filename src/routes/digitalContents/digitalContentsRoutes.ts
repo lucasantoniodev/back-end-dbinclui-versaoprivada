@@ -13,6 +13,15 @@ import { getByCategoryIdDigitalContentController } from "../../controllers/digit
 
 const digitalContentsRouter = Router();
 
+digitalContentsRouter.post(
+  "/",
+  uploadCloudinary.array("files"),
+  // bodyRequestMiddleware, // <- Este middleware serve para capturar o conteúdo da variável "data" enviado do formdata e inserir no no body da requisição. 
+  digitalContentRequestValidator("post"),
+  createDigitalContentRequestMiddleware,
+  createDigitalContentController.handler,
+);
+
 digitalContentsRouter.get(
   "/:id",
   digitalContentRequestValidator("get"),
@@ -22,14 +31,6 @@ digitalContentsRouter.get(
 
 digitalContentsRouter.get("/", getAllDigitalContentsController.handler);
 
-digitalContentsRouter.post(
-  "/",
-  uploadCloudinary.array("files"),
-  // bodyRequestMiddleware, // <- Este middleware serve para capturar o conteúdo da variável "data" enviado do formdata e inserir no no body da requisição. 
-  digitalContentRequestValidator("post"),
-  createDigitalContentRequestMiddleware,
-  createDigitalContentController.handler,
-);
 
 digitalContentsRouter.put(
   "/:id",
