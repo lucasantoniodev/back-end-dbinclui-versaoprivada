@@ -6,6 +6,7 @@ import { getByGuideIdCategoryController } from "../../controllers/categories/Get
 import { getByIdCategoryController } from "../../controllers/categories/GetByIdCategoryController.js";
 import { updateCategoryController } from "../../controllers/categories/UpdateCategoryController.js";
 import { categoryRequestMiddleware } from "../../middlewares/categories/categoryRequestMiddleware.js";
+import { deleteCategoryRequestMiddleware } from "../../middlewares/categories/deleteCategoryRequestMiddleware.js";
 import { categoryRequestValidator } from "../../middlewares/categories/validators/categoryRequestValidator.js";
 
 const categoriesRouter = Router();
@@ -43,7 +44,7 @@ categoriesRouter.get(
 categoriesRouter.delete(
   "/:id",
   categoryRequestValidator("delete"),
-  categoryRequestMiddleware,
+  deleteCategoryRequestMiddleware,
   deleteCategoryController.handler,
 );
 
