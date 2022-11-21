@@ -35,7 +35,9 @@ export class InMemoryGuideRepository implements GuideRepository {
     return result ?? null;
   }
 
-  async findCategoriesAndContentsByGuideId(id: string): Promise<GuideCategoriesAndContentsInterface | null> {
+  async findCategoriesAndContentsByGuideId(
+    id: string,
+  ): Promise<GuideCategoriesAndContentsInterface | null> {
     const result = this.databaseWithCategoryAndContents.find((guide) => guide._id === id);
 
     return result ?? null;
@@ -115,7 +117,7 @@ export class InMemoryGuideRepository implements GuideRepository {
         ],
       };
 
-      this.databaseWithCategoryAndContents.push(guideWithCategoriesAndContent)
+      this.databaseWithCategoryAndContents.push(guideWithCategoriesAndContent);
     }
   }
 }

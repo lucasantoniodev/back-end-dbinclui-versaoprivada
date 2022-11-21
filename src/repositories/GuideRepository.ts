@@ -6,6 +6,8 @@ export interface GuideRepository {
   update(guide: GuideEntity): Promise<number>;
   findAll(): Promise<GuideEntity[]>;
   findById(id: string): Promise<GuideEntity | null>;
-  findCategoriesAndContentsByGuideId(id: string): Promise<GuideCategoriesAndContentsInterface | null>;
+  findCategoriesAndContentsByGuideId(
+    id: string,
+  ): Promise<GuideCategoriesAndContentsInterface | null>;
   delete(id: string): Promise<number>;
 }

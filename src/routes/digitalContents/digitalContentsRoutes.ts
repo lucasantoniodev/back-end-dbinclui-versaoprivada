@@ -16,7 +16,7 @@ const digitalContentsRouter = Router();
 digitalContentsRouter.post(
   "/",
   uploadCloudinary.array("files"),
-  // bodyRequestMiddleware, // <- Este middleware serve para capturar o conteúdo da variável "data" enviado do formdata e inserir no no body da requisição. 
+  // bodyRequestMiddleware, // <- Este middleware serve para capturar o conteúdo da variável "data" enviado do formdata e inserir no no body da requisição.
   digitalContentRequestValidator("post"),
   createDigitalContentRequestMiddleware,
   createDigitalContentController.handler,
@@ -30,7 +30,6 @@ digitalContentsRouter.get(
 );
 
 digitalContentsRouter.get("/", getAllDigitalContentsController.handler);
-
 
 digitalContentsRouter.put(
   "/:id",
