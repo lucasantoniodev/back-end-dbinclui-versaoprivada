@@ -3,6 +3,7 @@ import { GuideCategoriesAndContentsInterface } from "../../interfaces/GuideCateg
 import { GuideRepository } from "../../repositories/GuideRepository.js";
 
 export class InMemoryGuideRepository implements GuideRepository {
+  databaseWithCategoryAndContents: GuideCategoriesAndContentsInterface[] = [];
   database: GuideEntity[] = [];
 
   async create(guide: GuideEntity): Promise<GuideEntity> {
@@ -34,10 +35,10 @@ export class InMemoryGuideRepository implements GuideRepository {
     return result ?? null;
   }
 
-  async findCategoriesAndContentsByGuideId(id: string): Promise<any> {
-    const result = this.database.filter((guide) => guide._id === id);
+  async findCategoriesAndContentsByGuideId(id: string): Promise<GuideCategoriesAndContentsInterface | null> {
+    const result = this.databaseWithCategoryAndContents.find((guide) => guide._id === id);
 
-    return result;
+    return result ?? null;
   }
 
   async delete(id: string): Promise<number> {
@@ -63,6 +64,58 @@ export class InMemoryGuideRepository implements GuideRepository {
       };
 
       this.database.push(guideExample);
+    }
+  }
+
+  async loadDataWithCategoriesandContents(amount: number) {
+    for (let i = 0; i < amount; i++) {
+      const guideWithCategoriesAndContent: GuideCategoriesAndContentsInterface = {
+        _id: i.toString(),
+        title: `Título do guia ${i}`,
+        content: `Conteúdo do guia ${i}`,
+        categories: [
+          {
+            _id: i.toString(),
+            title: `Título da categoria ${i}`,
+            shortDescription: `Descrição da categoria ${i}`,
+            guide: {
+              _id: i.toString(),
+              title: `Título do guia ${i}`,
+              content: `Conteúdo do guia ${i}`,
+            },
+            digitalContents: [
+              {
+                _id: i.toString(),
+                title: `Título do conteúdo ${i}`,
+                shortDescription: `Descrição do conteúdo ${i}`,
+                category: {
+                  _id: i.toString(),
+                  title: `Título da categoria ${i}`,
+                  shortDescription: `Descrição da categoria ${i}`,
+                  guide: {
+                    _id: i.toString(),
+                    title: `Título do guia ${i}`,
+                    content: `Conteúdo do guia ${i}`,
+                  },
+                },
+                guide: {
+                  _id: i.toString(),
+                  title: `Título do guia ${i}`,
+                  content: `Conteúdo do guia ${i}`,
+                },
+                filePaths: [
+                  {
+                    publicId: `PublicID ${i}`,
+                    filePath: `www.image${i}.com`,
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+      };
+
+      this.databaseWithCategoryAndContents.push(guideWithCategoriesAndContent)
     }
   }
 }

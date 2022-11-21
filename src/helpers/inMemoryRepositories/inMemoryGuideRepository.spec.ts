@@ -7,6 +7,7 @@ describe("InMemoryGuidesRepository", () => {
   beforeAll(async () => {
     repository = new InMemoryGuideRepository();
     await repository.loadData(1);
+    await repository.loadDataWithCategoriesandContents(3);
   });
 
   it("Should create and return an Guide entity", async () => {
@@ -60,5 +61,12 @@ describe("InMemoryGuidesRepository", () => {
 
     expect(result).toEqual(1);
     expect(repository.database.length).toEqual(1);
+  });
+
+  it("Should return a guide with categories and contents associate", async () => {
+    const result = await repository.findCategoriesAndContentsByGuideId("1");
+
+    expect(result).not.toBeNull();
+    expect(result?.title).toBe("Título do guia 1");
   });
 });

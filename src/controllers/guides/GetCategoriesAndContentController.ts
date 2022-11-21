@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { GuideMongoRepository } from "../../repositories/mongoRepositories/GuideMongoRepository.js";
 import { serverErrorResponse, sucessfulResponse } from "../../responses/appResponses.js";
-import { GetCategoriesAndContentGuideService } from "../../services/guides/GetCategoriesAndContentsGuideService.js";
+import { GetCategoriesAndContentsGuideService } from "../../services/guides/GetCategoriesAndContentsGuideService.js";
 
 class GetCategoriesAndContentController {
   async handler(req: Request, res: Response) {
@@ -9,7 +9,7 @@ class GetCategoriesAndContentController {
       const id = req.params["id"];
 
       const guideRepository = new GuideMongoRepository();
-      const guideService = new GetCategoriesAndContentGuideService(guideRepository);
+      const guideService = new GetCategoriesAndContentsGuideService(guideRepository);
 
       const result = await guideService.execute(id);
 

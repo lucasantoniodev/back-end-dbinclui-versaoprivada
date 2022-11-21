@@ -1,6 +1,6 @@
 import { GuideRepository } from "../../repositories/GuideRepository.js";
 
-export class GetCategoriesAndContentGuideService {
+export class GetCategoriesAndContentsGuideService {
   constructor(private readonly repository: GuideRepository) {}
   async execute(id: string) {
     try {
